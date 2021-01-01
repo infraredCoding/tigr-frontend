@@ -6,7 +6,7 @@
     <h3>A Platform For Online Speedcubing Competitions</h3>
   </div>
   <div class="pt-3">
-    <button type="button" name="button" class="cta btn btn-outline rounded-pill px-4">Get Started</button>
+    <router-link to="/signup" type="button" class="cta btn btn-outline rounded-pill px-4">Get Started</router-link>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
     font-family: 'Pacifico', cursive;
   }
   .cta{
-    background: #F1B24A;
+    background: #17b978;
     color: #fff;
     font-weight: bold;
   }

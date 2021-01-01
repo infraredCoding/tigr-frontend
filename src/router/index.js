@@ -1,14 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
+import Home from '../views/Home.vue'
+import AccountForm from '../views/Account-Form'
+import Dashboard from '../views/Main'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
+    component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/signup',
+    name: 'Signup',
+    component: AccountForm,
+    meta: {
+      redirectDash: true,
+    }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: AccountForm,
+    meta: {
+      redirectDash: true,
+    }
+  },
+
+  // auth required
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 

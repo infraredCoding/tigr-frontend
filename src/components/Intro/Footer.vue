@@ -14,7 +14,7 @@ footer {
   padding-top: 20px;
   margin-top: 20px;
   padding-bottom: 20px;
-  background: #164A41;
-  color: #9DC88D;
+  background: #071a52;
+  color: #e2f3f5;
 }
 </style>
