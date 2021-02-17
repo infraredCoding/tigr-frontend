@@ -17,7 +17,7 @@
       <input type="password" class="form-control" placeholder="Password" v-model="pass">
     </div>
     <div class="form-group py-2 px-3">
-      <input type="password" class="form-control" placeholder="Confirm Password" v-model="passC">
+      <input type="password" class="form-control" placeholder="Confirm Password" v-model="passC" :class="{'is-invalid' : comparePasswords === false}">
     </div>
     <span id="conf" v-if="comparePasswords === false">Passwords Don't Match</span>
     <div class="form-group pt-2 px-3">

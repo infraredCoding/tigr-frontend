@@ -1,24 +1,24 @@
 <template>
   <nav class="px-5 shadow-lg">
-    <div>
-        <h4 class="bname pt-3">TIGR</h4>
+    <div class="row">
+        <h4 class="col bname pt-3">TIGR</h4>
     </div>
     <ul class="nav-links">
-        <!-- <li v-if="loggedIn"><a href="#"><i class="far fa-user ic"></i></a></li> -->
-        <li v-if="loggedIn"><button class="btn text-white">Profile</button></li>
-        <li v-if="loggedIn"><button class="btn text-white" @click.prevent="logout"><i class="fas fa-sign-out-alt"></i></button></li>
+          <button class="btn text-white bg-transparent" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <ul class="dropdown-menu" id="ss" aria-labelledby="dropdownMenuLink">
+            <li v-if="loggedIn"><button class="btn text-black"><i class="far fa-bell"></i>  Notifications</button></li>
+            <li v-if="loggedIn"><button class="btn text-black" @click.prevent="logout"><i class="fas fa-sign-out-alt"></i>  Logout</button></li>
+          </ul>
+        <li v-if="loggedIn"><button class="btn text-white ls"><i class="far fa-bell"></i></button></li>
+        <li v-if="loggedIn"><button class="btn text-white ls" @click.prevent="logout"><i class="fas fa-sign-out-alt"></i></button></li>
     </ul>
-    <!-- <div class="burger" @click.prevent="toggleSidenav">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-    </div> -->
   </nav>
-  <!-- <Sidenav v-if="sidenav"></Sidenav> -->
+
 </template>
 
 <script>
-// import Sidenav from './Sidenav'
 
 export default {
   name: 'Navbar',
@@ -27,7 +27,6 @@ export default {
   },
   data(){
     return {
-      sidenav: false,
     }
   },
   computed:{
@@ -63,6 +62,12 @@ export default {
 </script>
 
 <style scoped>
+.bname{
+  /* font-family: 'Lobster', cursive; */
+  font-family: 'Pacifico', cursive;
+  font-size: 27px;
+  color: #e2f3f5;
+}
 .ic{
   font-size: 25px;
 }
@@ -92,86 +97,19 @@ nav{
   font-size: 15px;
   margin-right: 35px;
 }
-/*
-.burger {
+
+@media screen and (max-width: 400px) {
+  .ls{
     display: none;
+  }
 }
 
-.burger div {
-    width: 25px;
-    height: 3px;
-    background-color: rgb(226, 226, 226);
-    margin: 5px;
-    transition: all 0.3s ease;
-}
-@media screen and (max-width: 1024px) {
-  .nav-links {
-      width: 70%;
+@media screen and (min-width: 401px){
+  #dropdownMenuLink{
+    display: none;
   }
-}
-@media screen and (max-width: 995px) {
-  body {
-    overflow-x: hidden;
+  #ss{
+    display: none;
   }
-  .nav-links {
-    position: fixed;
-    right: 0px;
-    height: 90vh;
-    top: 10vh;
-    justify-content: space-around;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in;
-  }
-  .nav-links a{
-    color: #4D774E;
-  }
-  .burger {
-    padding-top: 12px;
-    display: block;
-    cursor: pointer;
-  }
-  #signup{
-    background-color: #F1B24A;
-    color: #fff;
-  }
-} */
-.nav-active {
-  transform: translateX(0%);
-}
-
-.toggle .line1 {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.toggle .line2 {
-  opacity: 0;
-}
-
-.toggle .line3 {
-  transform: rotate(45deg) translate(-5px, -6px);
-}
-#signup{
-  border: 2.5px solid #F1B24A;
-}
-
-.sidenav-toggler{
-  border: 2.5px solid #F1B24A;
-  border-radius: 10px;
-  color: #fff;
-}
-#signup:hover{
-  background: #F1B24A;
-  transition: 0.25s ease-in-out;
-}
-.bname{
-  /* font-family: 'Lobster', cursive; */
-  font-family: 'Pacifico', cursive;
-  font-size: 27px;
-  color: #e2f3f5;
 }
 </style>

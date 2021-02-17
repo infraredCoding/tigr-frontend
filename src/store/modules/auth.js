@@ -57,6 +57,9 @@ const mutations = {
 const getters = {
   loggedIn(state){
     return state.token !== null;
+  },
+  getToken(state){
+    return state.token;
   }
 }
 

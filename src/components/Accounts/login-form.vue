@@ -1,7 +1,7 @@
 <template>
   <form class="bg-white rounded-3 px-5 pt-3 mt-5 shadow-lg" @submit.prevent="login">
     <h3 class="text-center">Log In</h3>
-    {{res}}
+    <span id="conf">{{error}}</span>
     <div class="form-group py-3 px-3">
       <input type="email" class="form-control" placeholder="Email" v-model="email">
     </div>
@@ -22,6 +22,7 @@ export default {
     return{
       email: '',
       password: '',
+      error: null,
     }
   },
   methods: {
@@ -30,6 +31,10 @@ export default {
         email: this.email,
         password: this.password
       }).then(this.$router.push({ name: 'Dashboard'}))
+        .catch(err => {
+          this.error = err.response.data.message
+          // console.log(err.response)
+        })
     }
   }
 }
@@ -55,5 +60,9 @@ input[type=submit]{
   text-decoration: none;
   color: #17b978;
   font-weight: bold;
+}
+#conf{
+  color: red;
+  font-size: 14px;
 }
 </style>

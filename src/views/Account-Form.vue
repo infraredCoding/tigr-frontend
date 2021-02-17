@@ -1,6 +1,6 @@
 <template>
   <section>
-    <NavG></NavG>
+    <Navbar></Navbar>
     <div class="container-fluid row pb-5">
       <SignupForm class="col-sm-11 col-md-7 col-lg-6" v-if="$route.path == '/signup' "/>
       <LoginForm class="col-sm-11 col-md-7 col-lg-6" v-else-if="$route.path == '/login' "/>
@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import NavG from '../components/Navigation/Nav-General'
+import Navbar from '../components/Navigation/Navbar'
 import SignupForm from '../components/Accounts/signup-form'
 import LoginForm from '../components/Accounts/login-form'
 
 export default {
   name: 'AccountForm',
   components: {
-    NavG,
+    Navbar,
     SignupForm,
     LoginForm,
   }

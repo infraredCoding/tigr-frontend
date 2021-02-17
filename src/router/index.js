@@ -1,7 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import AccountForm from '../views/Account-Form'
-import Dashboard from '../views/Main'
+import Main from '../views/Main'
+import Dashboard from '../views/Pages/Dashboard'
+import Competitions from '../views/Pages/Competitions'
+import AddComp from '../views/Pages/AddComp'
+import CompForm from '../components/Comps/CompForm'
+import SubmitScramble from '../components/Comps/SubmitScramble'
+import Schedules from '../components/Comps/Scheduler'
+import Compete from '../views/Pages/Compete'
 
 const routes = [
   {
@@ -28,9 +35,52 @@ const routes = [
 
   // auth required
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
+    path: '/app',
+    name: 'App',
+    component: Main,
+    children: [
+      {
+        path: '',
+        component: Dashboard
+      },
+      {
+        path: 'dashboard',
+        component: Dashboard,
+        name: 'Dashboard'
+      },
+      {
+        path: 'competitions',
+        component: Competitions,
+        name: 'Competitions'
+      },
+      {
+        path: 'compete/:compid/:event/:round',
+        component: Compete,
+        name: 'Compete'
+      },
+      {
+        path: 'addComp',
+        component: AddComp,
+        name: 'AddComp',
+        children: [
+          {
+            path: 'compInfo',
+            component: CompForm,
+            name: 'compInfo'
+          },
+          {
+            path: 'scrambles/:id',
+            component: SubmitScramble,
+            name: 'submitScrambles'
+          },
+          {
+            path: 'schedules/:id',
+            component: Schedules,
+            name: 'makeSchedules'
+          }
+        ]
+      },
+    ],
     meta: {
       requiresAuth: true
     }

@@ -25,7 +25,7 @@ export default{
 </script>
 <style>
 header{
-  background: linear-gradient(104.87deg, #071a52 2%, #086972 60.49%), url('../assets/bg_proto.png');
+  background: linear-gradient(104.87deg, rgba(7, 26, 82, 0.94) 2%, rgba(8, 105, 114, 0.94) 60.49%), url('../assets/bg_proto.png');
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;

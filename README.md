@@ -1,4 +1,4 @@
-# cubebengal
+# TIGR
 
 ## Project setup
 ```
