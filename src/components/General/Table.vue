@@ -9,8 +9,11 @@
       </thead>
       <tbody>
         <tr v-for="(comps, i) in data" :key="i">
-          <td v-for="(comp, j) in comps" :key="j">{{comp}}</td>
-          <td v-if="title === 'Ongoing Comps'"><a href="#" class="btn btn-sm joinComp">Compete</a></td>
+          <td>{{comps.c}}</td>
+          <td>{{comps.start}}</td>
+          <td>{{comps.end}}</td>
+          <td v-if="title === 'Ongoing Comps' && !comps.registered"><button @click="$emit('joinComp', i)" class="btn btn-sm joinComp">Join</button></td>
+          <td v-else-if="title === 'Ongoing Comps' && comps.registered"><p class="py-1 rounded-pill joinComp">Joined</p></td>
         </tr>
       </tbody>
     </table>
@@ -42,6 +45,7 @@ table{
   border-radius: 10px;
 }
 .joinComp{
+  display: block;
   background: linear-gradient(to right, #9d50bb, #6e48aa);
   color: #e2f3f5;
 }

@@ -13,10 +13,9 @@ const mutations = {
 
   addEventRow(state, eid){
     state.eventSch.push({
-      id: eid,
-      date: null,
-      start: null,
-      end: null
+      EventId: eid,
+      StartTime: null,
+      EndTime: null
     })
   }
 }

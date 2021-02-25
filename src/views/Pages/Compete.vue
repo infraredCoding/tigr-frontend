@@ -26,10 +26,10 @@ export default {
     }
   },
   mounted(){
-    api.get('Competitions/getScrambles/6/333/1')
+    api.get(`Competitions/getScrambles/${this.$route.params.compid}/${this.$route.params.event}/${this.$route.params.round}`)
       .then(res => {
+        console.log(res.data);
         this.scrambleSet = res.data.scrambelSet;
-        console.log(res.data.scrambelSet);
       })
       .catch(err => console.log(err))
   },
@@ -43,7 +43,7 @@ export default {
         Penalties: this.timeList.penalties,
         Result: avg
       }
-      api.post('Competitions/submitTimes/6/333/1',body ,{
+      api.post(`Competitions/submitTimes/${this.$route.params.compid}/${this.$route.params.event}/${this.$route.params.round}`,body ,{
         headers: {
           Authorization: 'Bearer ' + store.getters.getToken
         }

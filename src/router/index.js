@@ -4,6 +4,7 @@ import AccountForm from '../views/Account-Form'
 import Main from '../views/Main'
 import Dashboard from '../views/Pages/Dashboard'
 import Competitions from '../views/Pages/Competitions'
+import CompOverview from '../views/Pages/CompOverview'
 import AddComp from '../views/Pages/AddComp'
 import CompForm from '../components/Comps/CompForm'
 import SubmitScramble from '../components/Comps/SubmitScramble'
@@ -52,6 +53,11 @@ const routes = [
         path: 'competitions',
         component: Competitions,
         name: 'Competitions'
+      },
+      {
+        path: 'competition/:id',
+        component: CompOverview,
+        name: 'CompOverview'
       },
       {
         path: 'compete/:compid/:event/:round',

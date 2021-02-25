@@ -3,17 +3,13 @@
     <div class="row justify-content-center">
       <div class="col-md-4 col-lg-4" v-for="(ev, i) in events" :key="i">
         <h5 class="text-center text-white pt-4">{{ev.eventName.split('-')[0]}} - {{ev.eventName.split('-')[1]}}</h5>
-        <div class="form-group pb-2 pt-2">
-          <label for="evDate">Date</label>
-          <input type="date" class="form-control" id="evDate" v-model="eventSch[i].date" required>
-        </div>
         <div class="form-group py-2">
           <label for="evStart">Start Time</label>
-          <input type="time" class="form-control" id="evStart" v-model="eventSch[i].start" required>
+          <input type="datetime-local" class="form-control" id="evStart" v-model="eventSch[i].StartTime">
         </div>
         <div class="form-group py-2">
           <label for="evEnd">End Time</label>
-          <input type="time" class="form-control" id="evEnd" v-model="eventSch[i].end" required>
+          <input type="datetime-local" class="form-control" id="evEnd" v-model="eventSch[i].EndTime">
         </div>
       </div>
       <!-- <EvSchedules v-for="ev in events"
@@ -57,7 +53,7 @@ export default {
     }
   },
   mounted(){
-    api.get("Competitions/eventSchedules/1")
+    api.get(`Competitions/eventSchedules/${this.$route.params.id}`)
       .then(res =>
         {
           console.log(res)

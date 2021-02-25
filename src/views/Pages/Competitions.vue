@@ -3,7 +3,8 @@
     <span class="input-group-text" id="searchIcon"><i class="fas fa-search"></i></span>
     <Search />
   </div>
-  <Table :title="'Ongoing Comps'" :columns="ongoingCols" :data="ongoingComps"/>
+  <Table @joinComp="joinComp" :status="joinedStatus" :title="'Ongoing Comps'" :columns="ongoingCols" :data="ongoingComps"/>
+  <Table :title="'Upcoming Comps'" :columns="upcomingCols" :data="upcomingComps"/>
 </template>
 
 <script>
@@ -21,7 +22,11 @@ export default {
   data () {
     return {
       ongoingCols: ['Competition', 'Start', 'End', ''],
-      ongoingComps: []
+      ongoingComps: [],
+      upcomingCols: ['Comp', 'Start', 'End', ''],
+      upcomingComps: [],
+      compIds: [],
+      registered: {},
     }
   },
   mounted () {
@@ -29,19 +34,41 @@ export default {
       headers: {
         Authorization: 'Bearer ' + store.getters.getToken
       }
-    }).then(res => this.processedData(res.data))
+    }).then(res => {
+      console.log(res);
+      this.registered = res.data.registered;
+      this.processedData(res.data.compList);
+    })
       .catch(err => console.log(err))
   },
   methods: {
     processedData(d){
+      let today = new Date();
       for (let i=0; i<d.length; i++){
+        this.compIds.push(d[i].compId);
+
         let final = {};
         final.c = d[i].name;
         final.start = new Date(d[i].startDate).toLocaleString();
         final.end = new Date(d[i].endDate).toLocaleString();
+        final.registered = this.registered[d[i].compId];
 
-        this.ongoingComps.push(final);
+        if (new Date(d[i].startDate) > today){
+          this.upcomingComps.push(final);
+        }else if(new Date(d[i].startDate).getDate() === today.getDate()){
+          this.ongoingComps.push(final);
+        }
       }
+    },
+    joinComp(i){
+      let index = this.compIds[i];
+      api.get(`Competitions/registerForComp/${index}`, {
+        headers: {
+          Authorization: 'Bearer ' + store.getters.getToken
+        }
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
   }
 }
