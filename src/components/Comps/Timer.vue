@@ -12,7 +12,8 @@
         <div class="row my-4">
           <div class="col">
             <h2 class="time" :class="{ ready: status === 'ready' }">{{formattedTime}}</h2>
-            {{status}}
+            <h5 v-if="!madeCutoff">Sorry, you didn't make cutoff</h5>
+            <h6 v-if="cutoff">Cutoff: {{ parseFloat(cutoff)}} seconds</h6>
           </div>
         </div>
         <div class="d-flex justify-content-center mt-3 mb-2">
@@ -37,7 +38,8 @@
 export default {
   name: 'Timer',
   props: {
-    scrs: Array
+    scrs: Array,
+    cutoff: Number,
   },
   data () {
     return {
@@ -47,7 +49,8 @@ export default {
       penalty: [],
       currentTime: 0,
       ticker: undefined,
-      formattedTime: '00:00.00'
+      formattedTime: '00:00.00',
+      madeCutoff: true,
     }
   },
   methods: {
@@ -68,7 +71,7 @@ export default {
     },
     prepOrStop(e){
       if(e.key == " "){
-        if(this.status === 'stopped' && this.count < this.scrs.length){
+        if(this.status === 'stopped' && this.count < this.scrs.length && this.madeCutoff){
           setTimeout(() => {
             this.status = 'ready';
           }, 200)
@@ -76,9 +79,18 @@ export default {
           this.status = 'stopped'
           window.clearInterval(this.ticker);
 
-          // this.timeList.push(this.currentTime);
-          // this.penalty.push(0);
-          this.addToList(parseInt(this.currentTime)/1000, 0);
+          if (this.count === 1 && this.cutoff){
+            if (this.timeList[0] > this.cutoff && (parseInt(this.currentTime)/1000) > this.cutoff){
+              this.addToList(parseInt(this.currentTime)/1000, 2);
+              this.madeCutoff = false;
+              this.$emit('failCutoff');
+            }else{
+              this.addToList(parseInt(this.currentTime)/1000, 0);
+            }
+          }else{
+            this.addToList(parseInt(this.currentTime)/1000, 0);
+          }
+
           this.$emit('addedTime', {'times': this.timeList, 'penalties': this.penalty});
           this.count++;
 

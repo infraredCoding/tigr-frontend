@@ -15,7 +15,9 @@ const mutations = {
     state.eventSch.push({
       EventId: eid,
       StartTime: null,
-      EndTime: null
+      EndTime: null,
+      Cutoff: null,
+      Qualifies: null
     })
   }
 }

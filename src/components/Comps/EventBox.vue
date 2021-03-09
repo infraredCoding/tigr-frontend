@@ -10,8 +10,14 @@
             <h6 v-else>This event is currently going on</h6>
             <button type="button" class="btn rounded-3 px-2" id="compete"
             :disabled="now > ends || now < starts"
+            v-if="eligible"
             @click.prevent="$emit('compete', puzzle, round)">
               Compete
+            </button>
+            <!-- <h6 v-else-if="!eligible">Sorry, You didn't qualify for this round</h6> -->
+            <button type="button" class="btn rounded-3 px-2" id="compete"
+            @click="$emit('viewRankings', puzzle, round)" v-if="now > ends">
+              Ranking
             </button>
           </div>
         </div>
@@ -27,7 +33,8 @@ export default {
     puzzle: String,
     round: String,
     start: String,
-    end: String
+    end: String,
+    eligible: Boolean,
   },
   data () {
     return {

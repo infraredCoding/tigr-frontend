@@ -10,6 +10,7 @@ import CompForm from '../components/Comps/CompForm'
 import SubmitScramble from '../components/Comps/SubmitScramble'
 import Schedules from '../components/Comps/Scheduler'
 import Compete from '../views/Pages/Compete'
+import Rankings from '../views/Pages/Rankings'
 
 const routes = [
   {
@@ -58,6 +59,11 @@ const routes = [
         path: 'competition/:id',
         component: CompOverview,
         name: 'CompOverview'
+      },
+      {
+        path: 'rankings/:compid/:event/:round',
+        component: Rankings,
+        name: 'rankings'
       },
       {
         path: 'compete/:compid/:event/:round',

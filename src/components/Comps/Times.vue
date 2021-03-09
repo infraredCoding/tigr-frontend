@@ -8,7 +8,8 @@
             <ol>
               <li v-for="(t, i) in solves.times" :key="i">{{ formatSolves(t, solves.penalties[i]) }}</li>
             </ol>
-
+            <h6 v-if="!madeCutoff">Ao5: DNF</h6>
+            <button v-if="!madeCutoff" type="button" class="btn rounded-3 px-2" id="commit" @click="$emit('submitTimes', null)">Submit</button>
             <div v-if="solves.times !== undefined && solves.times.length === 5">
               <h6>Ao5: {{getAvg}}</h6>
               <button type="button" class="btn rounded-3 px-2" id="commit" @click="$emit('submitTimes', getAvg)">Submit</button>
@@ -26,6 +27,8 @@ export default {
   name: 'TimeList',
   props: {
     solves: Array,
+    madeCutoff: Boolean,
+    cutoff: Number,
   },
   methods: {
     formatSolves(t, p){

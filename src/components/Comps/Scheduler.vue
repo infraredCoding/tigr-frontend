@@ -5,11 +5,19 @@
         <h5 class="text-center text-white pt-4">{{ev.eventName.split('-')[0]}} - {{ev.eventName.split('-')[1]}}</h5>
         <div class="form-group py-2">
           <label for="evStart">Start Time</label>
-          <input type="datetime-local" class="form-control" id="evStart" v-model="eventSch[i].StartTime">
+          <input type="datetime-local" class="form-control" required id="evStart" v-model="eventSch[i].StartTime">
         </div>
         <div class="form-group py-2">
           <label for="evEnd">End Time</label>
-          <input type="datetime-local" class="form-control" id="evEnd" v-model="eventSch[i].EndTime">
+          <input type="datetime-local" class="form-control" id="evEnd" v-model="eventSch[i].EndTime" required>
+        </div>
+        <div class="form-group py-2">
+          <label for="evEnd">Cutoff</label>
+          <input type="number" class="form-control" id="evEnd" v-model="eventSch[i].Cutoff">
+        </div>
+        <div class="form-group py-2">
+          <label for="evEnd">Top x Cubers Qualifies For Next Round</label>
+          <input type="number" class="form-control" id="evEnd" v-model="eventSch[i].Qualifies" required>
         </div>
       </div>
       <!-- <EvSchedules v-for="ev in events"

@@ -55,7 +55,7 @@ export default {
 
         if (new Date(d[i].startDate) > today){
           this.upcomingComps.push(final);
-        }else if(new Date(d[i].startDate).getDate() === today.getDate()){
+        }else if(new Date(d[i].startDate) <= today && new Date(d[i].endDate) >= today){
           this.ongoingComps.push(final);
         }
       }

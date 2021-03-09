@@ -2,8 +2,8 @@
   <h2>Some Comp 2021</h2>
   <h3>3x3x3 Round-1</h3>
   <div class="row">
-    <Timer :scrs="scrambleSet" @addedTime="updateTimeList" />
-    <TimeList :solves="timeList" @submitTimes="submitTimes"/>
+    <Timer :cutoff="cutoff" :scrs="scrambleSet" @addedTime="updateTimeList" @failCutoff="failCutoff"/>
+    <TimeList :madeCutoff="madeCutoff" :solves="timeList" @submitTimes="submitTimes"/>
   </div>
 </template>
 
@@ -21,8 +21,10 @@ export default {
   },
   data(){
     return {
+      cutoff: null,
       scrambleSet: [],
-      timeList: []
+      timeList: [],
+      madeCutoff: true,
     }
   },
   mounted(){
@@ -30,10 +32,14 @@ export default {
       .then(res => {
         console.log(res.data);
         this.scrambleSet = res.data.scrambelSet;
+        this.cutoff = res.data.cutOff;
       })
       .catch(err => console.log(err))
   },
   methods: {
+    failCutoff(){
+      this.madeCutoff = false;
+    },
     updateTimeList(tlist){
       this.timeList = tlist;
     },
